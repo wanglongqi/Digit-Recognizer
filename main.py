@@ -1,5 +1,5 @@
 # 0.95857, Try svm next time.
-# Add a preprocessing, Score down to 0.82700
+# Add a preprocessing 
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.qda import QDA
@@ -19,9 +19,6 @@ y = y.values
 for ind in range(X.shape[0]):
 	X[ind,:] = where(X[ind,:] > mean(X[ind,:]),0.,1.)
 
-# Normalize
-X = X / 255.
-
 # PCA
 pca = PCA(50) 
 pca.fit(X)
@@ -38,9 +35,6 @@ print 'Accuracy score = ',accuracy_score(p,y)
 # Read in test data
 test = pd.read_csv('test.csv')
 test = test.values
-
-# Normalize
-test = test / 255.
 
 # Preprocessing
 for ind in range(test.shape[0]):
