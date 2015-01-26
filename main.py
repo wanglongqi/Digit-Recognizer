@@ -1,8 +1,11 @@
 # 0.95857, Try svm next time.
+# Add a preprocessing, Score down to 0.82700
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.qda import QDA
 from sklearn.metrics import accuracy_score
+from skimage import measure ,morphology
+from numpy import *
 
 # Read in data
 train = pd.read_csv('train.csv')
@@ -11,6 +14,10 @@ train.drop('label', axis=1, inplace=True)
 
 X = train.values
 y = y.values
+
+# Preprocessing
+for ind in range(X.shape[0]):
+	X[ind,:] = where(X[ind,:] > mean(X[ind,:]),0.,1.)
 
 # Normalize
 X = X / 255.
