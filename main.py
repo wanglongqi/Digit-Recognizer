@@ -37,9 +37,14 @@ print 'Accuracy score = ',accuracy_score(p,y)
 
 # Read in test data
 test = pd.read_csv('test.csv')
+test = test.values
 
 # Normalize
 test = test / 255.
+
+# Preprocessing
+for ind in range(test.shape[0]):
+	test[ind,:] = where(test[ind,:] > mean(test[ind,:]),0.,1.)
 
 # Transform data
 test = pca.transform(test)
